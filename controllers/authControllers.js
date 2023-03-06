@@ -4,15 +4,6 @@ const jwt = require("jsonwebtoken");
 const Usuario = require("../models/usuario");
 
 const reguisterUser = async (req, res) => {
-  const error = validationResult(req);
-
-  if (!error.isEmpty()) {
-    return res.status(501).json({
-      ok: false,
-      error: error.mapped(),
-    });
-  }
-
   const { email, password, username } = req.body;
   try {
     let usuario = await Usuario.findOne({ email });
@@ -60,16 +51,6 @@ const reguisterUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
-
-  const error = validationResult(req);
-
-  if (!error.isEmpty()) {
-    return res.status(501).json({
-      ok: false,
-      error: error.mapped(),
-    });
-  }
-
   try {
     let usuario = await Usuario.findOne({ email });
 
